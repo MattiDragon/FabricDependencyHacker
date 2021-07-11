@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group 'io.github.mattidragon'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.eclipsesource.minimal-json:minimal-json:0.9.5'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+application {
+    setMainClassName 'io.github.mattidragon.fabricdependencyhacker.gui.GUIManager'
+}
+
+shadowJar {
+    minimize()
+}
+
+tasks.build.dependsOn tasks.shadowJar
+
+test {
+    useJUnitPlatform()
+}
